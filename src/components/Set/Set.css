@@ -1,0 +1,29 @@
+.set {
+  border: 3px solid red;
+  border-radius: 20px;
+  height: 680px;
+  margin: 20px auto;
+  position: relative;
+}
+
+.set.w1 {
+  width: 170px;
+}
+.set.w2 {
+  width: 320px;
+}
+.set.w3 {
+  width: 470px;
+}
+.set.w4 {
+  width: 620px;
+}
+.set.w5 {
+  width: 770px;
+}
+.set.w6 {
+  width: 920px;
+}
+.set.w7 {
+  width: 1070px;
+}
