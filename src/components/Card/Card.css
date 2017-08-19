@@ -9,7 +9,12 @@
   height: 200px;
   justify-content: center;
   position: absolute;
+  transition: 0.5s;
   width: 130px;
+}
+
+.card.selected {
+  background: #9944ff;
 }
 
 .card.y0 {

@@ -6,6 +6,9 @@
   position: relative;
 }
 
+.set.w0 {
+  width: 20px;
+}
 .set.w1 {
   width: 170px;
 }
