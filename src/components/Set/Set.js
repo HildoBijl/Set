@@ -4,18 +4,30 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 
-import { indexToProp, keyToPos } from '../../logic/setGame.js'
+import { indexToProp, keyToPos, calculatePoints } from '../../logic/setGame.js'
 import setActions from '../../actions/setGame.js'
 
 import Card from '../Card/Card.js'
 
 class Set extends Component {
+  constructor() {
+    super()
+    this.state = {
+      pointsLeft: 0,
+    }
+  }
   componentDidMount() {
     document.onkeydown = this.handleKeyPress.bind(this)
+    this.interval = setInterval(this.updatePointsLeft.bind(this), 50)
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
-  handleClick(pos) {
-    this.props.selectCard(pos)
+  updatePointsLeft() {
+    this.setState({
+      pointsLeft: calculatePoints(this.props.lastSetAt)
+    })
   }
 
   handleKeyPress(event) {
@@ -26,15 +38,8 @@ class Set extends Component {
     this.handleClick(pos)
   }
 
-  resetGame() {
-    this.setState({
-      deck: this.shuffle(18),
-      table: [],
-      selected: [],
-      cardsUsed: 0,
-      gameOver: false,
-    })
-    this.addCardsToTable([])
+  handleClick(pos) {
+    this.props.selectCard(pos)
   }
 
   render() {
@@ -47,23 +52,29 @@ class Set extends Component {
           {gameOver: this.props.gameOver}
         )}
       >
-        {table.map((cardIndex, pos) => <Card
-          key={cardIndex}
-          details={indexToProp(cardIndex)}
-          pos={pos}
-          selected={this.props.selected.includes(pos)}
-          onClick={() => this.handleClick(pos)}
-        />)}
-        <div className="gameOverScreen">
-          Your game is over. Well done!
-          <span className="btn" onClick={this.props.resetGame}>Play again</span>
+        <div className="info">
+          {this.props.gameOver ? '' : 'Score: ' + Math.round(this.props.score) + ' + ' + Math.round(this.state.pointsLeft)}
+        </div>
+        <div className="cards">
+          {table.map((cardIndex, pos) => <Card
+            key={cardIndex}
+            details={indexToProp(cardIndex)}
+            pos={pos}
+            selected={this.props.selected.includes(pos)}
+            onClick={() => this.handleClick(pos)}
+          />)}
+          <div className="gameOverScreen">
+            <p>Your game is over. Well done!</p>
+            <p>Score: {Math.round(this.props.score)}</p>
+            <span className="btn" onClick={this.props.resetGame}>Play again</span>
+          </div>
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.setGame
   }

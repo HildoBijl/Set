@@ -40,6 +40,12 @@ export function findSets(cards) {
   return sets
 }
 
+// Calculate the points which we get for a set, given that the previous set was found at the given lastSetAt date parameter.
+export function calculatePoints(lastSetAt) {
+  let timePassed = new Date() - lastSetAt
+  return 100*Math.pow(0.5, timePassed/15000)
+}
+
 // Turns hotkeys into card positions.
 export const keyToPos = {
   q: 0, w: 3, e: 6, r: 9, t: 12, y: 15, u: 18,

@@ -1,5 +1,5 @@
 import { shuffle } from '../logic/util.js'
-import { indexToProp, findSets, isSet } from '../logic/setGame.js'
+import { indexToProp, findSets, isSet, calculatePoints } from '../logic/setGame.js'
 
 export default function setGameReducer(state = getInitialState(), action) {
   switch (action.type) {
@@ -22,7 +22,13 @@ export default function setGameReducer(state = getInitialState(), action) {
       if (isSet(selected.map((v) => state.table[v]).map(indexToProp))) {
         let table = state.table.slice(0)
         selected.sort((a,b) => b-a).forEach((pos) => table.splice(pos, 1))
-        return addCardsToTable({ ...state, table, selected: [] })
+        return addCardsToTable({
+          ...state,
+          table,
+          selected: [],
+          score: state.score + calculatePoints(state.lastSetAt),
+          lastSetAt: new Date(),
+        })
       } else {
         return { ...state, selected: [] }
       }
@@ -41,6 +47,8 @@ function getInitialState() {
     selected: [],
     cardsUsed: 0,
     gameOver: false,
+    score: 0,
+    lastSetAt: new Date(),
   }
   return addCardsToTable(state)
 }

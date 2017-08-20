@@ -5,6 +5,10 @@ body {
   font-family: sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .app {
   text-align: center;
 }
@@ -16,7 +20,7 @@ body {
 
 .header {
   background-color: #222;
-  height: 150px;
+  height: 190px;
   padding: 20px;
   color: white;
 }
