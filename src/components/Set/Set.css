@@ -1,10 +1,46 @@
 .set {
   border: 3px solid red;
   border-radius: 20px;
+  box-sizing: border-box;
   height: 680px;
   margin: 20px auto;
   position: relative;
 }
+
+.gameOverScreen {
+  background-image: linear-gradient(135deg, rgba(102,51,238,0.9), rgba(170,170,170,0.9));
+  border-radius: inherit;
+  box-sizing: border-box;
+  color: #fff;
+  display: none;
+  font-size: 20px;
+  height: 120px;
+  left: 50%;
+  padding: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 340px;
+  z-index: 10;
+}
+
+.set.gameOver .gameOverScreen {
+  display: block;
+}
+
+.gameOverScreen .btn {
+  background-image: linear-gradient(160deg, rgba(136,136,221,1), rgba(102,102,221,1));
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  font-size: 18px;
+  height: 20px;
+  margin: 15px auto 0px;
+  padding: 5px;
+  width: 120px;
+}
+
+
 
 .set.w0 {
   width: 20px;

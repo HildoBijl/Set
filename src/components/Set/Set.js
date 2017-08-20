@@ -9,11 +9,21 @@ export default class Set extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      deck: this.shuffle(81),
+      deck: this.shuffle(18),
       table: [],
       selected: [],
-      cardsUsed: 0
+      cardsUsed: 0,
+      gameOver: false,
     }
+  }
+
+  componentDidMount() {
+    this.addCardsToTable([])
+    this.initialize()
+  }
+
+  initialize() {
+    document.onkeydown = this.handleKeyPress.bind(this)
   }
 
   shuffle(n) {
@@ -72,18 +82,20 @@ export default class Set extends Component {
   addCardsToTable(table) {
     const tableAsProp = table.map(this.indexToProp)
     let cardsUsed = this.state.cardsUsed
+    const deck = this.state.deck
     while (this.findSet(tableAsProp).length === 0 || table.length < 12 || table.length % 3 !== 0) {
-      const cardFromDeck = this.state.deck[cardsUsed++]
+      if (cardsUsed >= deck.length)
+        break
+      const cardFromDeck = deck[cardsUsed++]
       table.push(cardFromDeck)
       tableAsProp.push(this.indexToProp(cardFromDeck))
     }
     const aantalSets = this.findSet(tableAsProp).length
     console.log(aantalSets === 1 ? 'Er is nu 1 set.' : 'Er zijn nu ' + aantalSets + ' sets.')
+    if (aantalSets === 0) {
+      return this.setState({ gameOver: true })
+    }
     this.setState({ table, cardsUsed })
-  }
-
-  componentDidMount() {
-    this.addCardsToTable([])
   }
 
   handleClick(pos) {
@@ -109,13 +121,35 @@ export default class Set extends Component {
     this.setState({ selected })
   }
 
+  handleKeyPress(event) {
+    const pos = keyToPos[event.key]
+    if (!(pos >= 0 && pos < this.state.table.length))
+      return
+    event.preventDefault()
+    this.handleClick(pos)
+  }
+
+  resetGame() {
+    this.setState({
+      deck: this.shuffle(18),
+      table: [],
+      selected: [],
+      cardsUsed: 0,
+      gameOver: false,
+    })
+    this.addCardsToTable([])
+  }
+
   render() {
     const table = this.state.table
     return (
-      <div className={classnames(
-        "set",
-        "w"+Math.ceil(table.length/3)
-      )}>
+      <div
+        className={classnames(
+          "set",
+          "w"+Math.ceil(table.length/3),
+          {gameOver: this.state.gameOver}
+        )}
+      >
         {table.map((cardIndex, pos) => <Card
           key={cardIndex}
           details={this.indexToProp(cardIndex)}
@@ -123,7 +157,17 @@ export default class Set extends Component {
           selected={this.state.selected.includes(pos)}
           onClick={() => this.handleClick(pos)}
         />)}
+        <div className="gameOverScreen">
+          Your game is over. Well done!
+          <span className="btn" onClick={this.resetGame.bind(this)}>Play again</span>
+        </div>
       </div>
     )
   }
+}
+
+const keyToPos = {
+  q: 0, w: 3, e: 6, r: 9, t: 12, y: 15, u: 18,
+  a: 1, s: 4, d: 7, f: 10, g: 13, h: 16, j: 19,
+  z: 2, x: 5, c: 8, v: 11, b: 14, n: 17, m: 20,
 }
