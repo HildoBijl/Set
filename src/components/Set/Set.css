@@ -8,11 +8,21 @@
 }
 
 .set .info {
+  display: flex;
+  flex-flow: row nowrap;
   font-size: 16px;
   height: 40px;
+  justify-content: space-between;
   padding: 13px 25px;
-  text-align: left;
   width: 100%;
+}
+
+.set .score {
+  text-align: left;
+}
+
+.set .setsLeft {
+  text-align: right;
 }
 
 .set .cards {

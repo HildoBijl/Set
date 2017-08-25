@@ -44,6 +44,7 @@ class Set extends Component {
 
   render() {
     const table = this.props.table
+    const cardsUsed = this.props.cardsUsed
     return (
       <div
         className={classnames(
@@ -53,7 +54,8 @@ class Set extends Component {
         )}
       >
         <div className="info">
-          {this.props.gameOver ? '' : 'Score: ' + Math.round(this.props.score) + ' + ' + Math.round(this.state.pointsLeft)}
+          <div className="score">Score: {Math.round(this.props.score)} + {Math.round(this.state.pointsLeft)}</div>
+          <div className="setsLeft">Sets left: {27 - (cardsUsed - table.length) / 3}</div>
         </div>
         <div className="cards">
           {table.map((cardIndex, pos) => <Card
@@ -65,7 +67,7 @@ class Set extends Component {
           />)}
           <div className="gameOverScreen">
             <p>Your game is over. Well done!</p>
-            <p>Score: {Math.round(this.props.score)}</p>
+            <p>Score: {Math.round(this.props.score / (27 - table.length / 3) * 27) }</p>
             <span className="btn" onClick={this.props.resetGame}>Play again</span>
           </div>
         </div>
