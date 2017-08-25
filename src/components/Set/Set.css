@@ -2,16 +2,16 @@
   border: 3px solid red;
   border-radius: 20px;
   box-sizing: border-box;
-  height: 710px;
-  margin: 20px auto;
-  min-width: 170px;
+  height: 96vh;
+  margin: 2vh auto;
+  min-width: 14vw;
 }
 
 .set .info {
   display: flex;
   flex-flow: row nowrap;
   font-size: 16px;
-  height: 40px;
+  height: 7vh;
   justify-content: space-between;
   padding: 13px 25px;
   width: 100%;
@@ -69,26 +69,26 @@
 }
 
 .set.w0 {
-  width: 20px;
+  width: 3vh;
 }
 .set.w1 {
-  width: 170px;
+  width: 24vh;
 }
 .set.w2 {
-  width: 320px;
+  width: 45vh;
 }
 .set.w3 {
-  width: 470px;
+  width: 66vh;
 }
 .set.w4 {
-  width: 620px;
+  width: 87vh;
 }
 .set.w5 {
-  width: 770px;
+  width: 108vh;
 }
 .set.w6 {
-  width: 920px;
+  width: 129vh;
 }
 .set.w7 {
-  width: 1070px;
+  width: 150vh;
 }

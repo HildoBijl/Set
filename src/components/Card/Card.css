@@ -1,16 +1,16 @@
 .card {
   background: white;
-  border-radius: 10px;
-  box-shadow: 10px 10px 8px #222;
+  border-radius: 2vh;
+  box-shadow: 1.5vh 1.5vh 1.2vh #222;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   font-size: 30px;
-  height: 200px;
+  height: 28vh;
   justify-content: center;
   position: absolute;
   transition: 0.5s;
-  width: 130px;
+  width: 18vh;
 }
 
 .card.selected {
@@ -18,34 +18,34 @@
 }
 
 .card.y0 {
-  top: 10px;
+  top: 2vh;
 }
 .card.y1 {
-  top: 230px;
+  top: 33vh;
 }
 .card.y2 {
-  top: 450px;
+  top: 64vh;
 }
 .card.x0 {
-  left: 20px;
+  left: 2vh;
 }
 .card.x1 {
-  left: 170px;
+  left: 23vh;
 }
 .card.x2 {
-  left: 320px;
+  left: 44vh;
 }
 .card.x3 {
-  left: 470px;
+  left: 65vh;
 }
 .card.x4 {
-  left: 620px;
+  left: 86vh;
 }
 .card.x5 {
-  left: 770px;
+  left: 97vh;
 }
 .card.x6 {
-  left: 920px;
+  left: 118vh;
 }
 
 .card .shape {

@@ -53,10 +53,10 @@ class Set extends Component {
           {gameOver: this.props.gameOver}
         )}
       >
-        <div className="info">
+        {/*}<div className="info">
           <div className="score">Score: {Math.round(this.props.score)} + {Math.round(this.state.pointsLeft)}</div>
           <div className="setsLeft">Sets left: {27 - (cardsUsed - table.length) / 3}</div>
-        </div>
+        </div> TODO: PUT BACK */}
         <div className="cards">
           {table.map((cardIndex, pos) => <Card
             key={cardIndex}
