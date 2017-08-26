@@ -7,6 +7,7 @@ import classnames from 'classnames'
 import { indexToProp, keyToPos, calculatePoints } from '../../logic/setGame.js'
 import setActions from '../../actions/setGame.js'
 
+import ShapeDefinitions from '../../assets/ShapeDefinitions.js'
 import Card from '../Card/Card.js'
 
 class Set extends Component {
@@ -53,10 +54,11 @@ class Set extends Component {
           {gameOver: this.props.gameOver}
         )}
       >
-        {/*}<div className="info">
+        <ShapeDefinitions />
+        {/*<div className="info">
           <div className="score">Score: {Math.round(this.props.score)} + {Math.round(this.state.pointsLeft)}</div>
           <div className="setsLeft">Sets left: {27 - (cardsUsed - table.length) / 3}</div>
-        </div> TODO: PUT BACK */}
+        </div> TODO: PUT BACK*/}
         <div className="cards">
           {table.map((cardIndex, pos) => <Card
             key={cardIndex}

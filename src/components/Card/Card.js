@@ -7,7 +7,11 @@ export default class Card extends Component {
   render() {
     const card = this.props.details
     const numberOfShapes = card[1] + 1
-    const arr = new Array(numberOfShapes).fill(0).map((v,i) => <div key={i} className="shape"></div>)
+    const arr = new Array(numberOfShapes).fill(0).map((v,i) => (
+      <svg key={i} className="shape" xmlns="http://www.w3.org/2000/svg">
+        <use xlinkHref={'#'+['rect','ellipse','wave'][card[2]]} />
+      </svg>
+    ))
     return (
       <div onClick={this.props.onClick} className={
           classnames(
