@@ -21,7 +21,7 @@ export default function setGameReducer(state = getInitialState(), action) {
       // Check if it is a set.
       if (isSet(selected.map((v) => state.table[v]).map(indexToProp))) {
         let table = state.table.slice(0)
-        selected.sort((a,b) => b-a).forEach((pos) => table.splice(pos, 1))
+        selected.forEach((pos) => table[pos] = undefined)
         return addCardsToTable({
           ...state,
           table,
@@ -57,16 +57,34 @@ function getInitialState() {
 function addCardsToTable(state) {
   // Keep moving cards from the deck to the table until all the required conditions are met.
   const tableAsProp = state.table.map(indexToProp)
-  while (findSets(tableAsProp).length === 0 || state.table.length < 12 || state.table.length % 3 !== 0) {
+  let numCardsOnTable = state.table.reduce((sum,v) => (v !== undefined ? sum + 1 : sum), 0)
+  while (findSets(tableAsProp).length === 0 || numCardsOnTable < 12 || numCardsOnTable % 3 !== 0) {
     // If the deck is empty, stop adding cards.
     if (state.cardsUsed >= state.deck.length)
       break
 
     // Add a card to the table.
     const cardFromDeck = state.deck[state.cardsUsed++]
-    state.table.push(cardFromDeck)
-    tableAsProp.push(indexToProp(cardFromDeck))
+    const emptyPlace = state.table.indexOf(undefined)
+    if (emptyPlace === -1) {
+      state.table.push(cardFromDeck)
+      tableAsProp.push(indexToProp(cardFromDeck))
+    } else {
+      state.table[emptyPlace] = cardFromDeck
+      tableAsProp[emptyPlace] = indexToProp(cardFromDeck)
+    }
+    numCardsOnTable++
   }
+  // Fill up the holes on the table by moving the cards too far left.
+  let holePosition = state.table.indexOf(undefined)
+  for (let i = numCardsOnTable; holePosition >= 0 && holePosition < numCardsOnTable; i++) {
+    let cardToMove = state.table[i]
+    if (cardToMove === undefined)
+      continue
+    state.table[holePosition] = cardToMove
+    holePosition = state.table.indexOf(undefined)
+  }
+  state.table.length = numCardsOnTable // Remove the cards that we just moved.
   console.log(findSets(tableAsProp).length === 1 ? 'Er is nu 1 set.' : 'Er zijn nu ' + findSets(tableAsProp).length + ' sets.')
 
   // If we have no sets, then the game is over.

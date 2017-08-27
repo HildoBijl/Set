@@ -7,6 +7,8 @@ export function propToIndex(card) {
 
 // Converts a card index, like 59, to a set of four properties, like [2,1,0,2].
 export function indexToProp(index) {
+  if (index === undefined)
+    return undefined
   const arr = []
   for (let i = 0; i < 4; i++) {
     arr[i] = index % 3
@@ -18,7 +20,9 @@ export function indexToProp(index) {
 // Checks whether the given cards form a set. The array should be an array of three cards, where a "card" is an array of card properties.
 export function isSet(cards) {
   if (cards.length !== 3)
-  throw new Error('isSet received an array of cards that was not of length 3.')
+    throw new Error('isSet received an array of cards that was not of length 3.')
+  if (cards.indexOf(undefined) !== -1)
+    return false
   for (let i = 0; i < cards[0].length; i++) {
     if ((cards[0][i] + cards[1][i] + cards[2][i]) % 3 !== 0)
     return false
@@ -33,7 +37,7 @@ export function findSets(cards) {
     for (let j = 0; j < i; j++) {
       for (let k = 0; k < j; k++) {
         if (isSet([cards[i], cards[j], cards[k]]))
-        sets.push([k,j,i])
+          sets.push([k,j,i])
       }
     }
   }

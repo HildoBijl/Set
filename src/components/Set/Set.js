@@ -32,15 +32,18 @@ class Set extends Component {
   }
 
   handleKeyPress(event) {
-    const pos = keyToPos[event.key]
-    if (!(pos >= 0 && pos < this.props.table.length))
-      return
-    event.preventDefault()
-    this.handleClick(pos)
-  }
+    // Check the spacebar/enter for starting/resetting the game.
+    if (this.props.gameOver && (event.key === " " || event.key === "Enter")) {
+      event.preventDefault()
+      this.props.resetGame()
+    }
 
-  handleClick(pos) {
-    this.props.selectCard(pos)
+    // Check the letter keys for selecting a card.
+    const pos = keyToPos[event.key]
+    if (pos >= 0 && pos < this.props.table.length) {
+      event.preventDefault()
+      this.props.selectCard(pos)
+    }
   }
 
   render() {
@@ -65,7 +68,7 @@ class Set extends Component {
             details={indexToProp(cardIndex)}
             pos={pos}
             selected={this.props.selected.includes(pos)}
-            onClick={() => this.handleClick(pos)}
+            onClick={() => this.props.selectCard(pos)}
           />)}
           <div className="gameOverScreen">
             <p>Your game is over. Well done!</p>

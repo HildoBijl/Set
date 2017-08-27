@@ -5,6 +5,7 @@
   height: 96vh;
   margin: 2vh auto;
   min-width: 14vw;
+  transition: 0.5s;
 }
 
 .set .info {
