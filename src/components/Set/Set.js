@@ -4,33 +4,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 
-import { indexToProp, keyToPos, calculatePoints } from '../../logic/setGame.js'
+import { indexToProp, keyToPos } from '../../logic/setGame.js'
 import setActions from '../../actions/setGame.js'
 
 import ShapeDefinitions from '../../assets/ShapeDefinitions.js'
 import Card from '../Card/Card.js'
+import Info from '../Info/Info.js'
 
 class Set extends Component {
-  constructor() {
-    super()
-    this.state = {
-      pointsLeft: 0,
-    }
-  }
   componentDidMount() {
     document.onkeydown = this.handleKeyPress.bind(this)
-    this.interval = setInterval(this.updatePointsLeft.bind(this), 50)
   }
-  componentWillUnmount() {
-    clearInterval(this.interval)
-  }
-
-  updatePointsLeft() {
-    this.setState({
-      pointsLeft: calculatePoints(this.props.lastSetAt)
-    })
-  }
-
   handleKeyPress(event) {
     // Check the spacebar/enter for starting/resetting the game.
     if (this.props.gameOver && (event.key === " " || event.key === "Enter")) {
@@ -39,7 +23,8 @@ class Set extends Component {
     }
 
     // Check the letter keys for selecting a card.
-    const pos = keyToPos[event.key]
+    let pos = keyToPos[event.key.toLowerCase()]
+    pos = this.props.table.length - 3 - pos + 2*(pos % 3) // We adjust the position because cards are actually shown from the right to the left.
     if (pos >= 0 && pos < this.props.table.length) {
       event.preventDefault()
       this.props.selectCard(pos)
@@ -48,34 +33,56 @@ class Set extends Component {
 
   render() {
     const table = this.props.table
+    const deck = this.props.deck
     const cardsUsed = this.props.cardsUsed
+
     return (
       <div
         className={classnames(
           "set",
           "w"+Math.ceil(table.length/3),
-          {gameOver: this.props.gameOver}
+          {gameOver: this.props.gameOver},
+          {noCardsInDeck: this.props.cardsUsed >= this.props.deck.length},
+          {cardsOnPile: this.props.cardsUsed !== this.props.table.length},
+          {starting: !this.props.gameOver && this.props.table.length === 0}
         )}
       >
-        <ShapeDefinitions />
-        {/*<div className="info">
-          <div className="score">Score: {Math.round(this.props.score)} + {Math.round(this.state.pointsLeft)}</div>
-          <div className="setsLeft">Sets left: {27 - (cardsUsed - table.length) / 3}</div>
-        </div> TODO: PUT BACK*/}
-        <div className="cards">
-          {table.map((cardIndex, pos) => <Card
+        <Info /> 
+        {deck.map((cardIndex, deckPos) => {
+          let pos = table.indexOf(cardIndex)
+          if (pos === -1) {
+            if (deckPos < cardsUsed) {
+              pos = "pile"
+            } else {
+              pos = "deck"
+            }
+          }
+          return <Card
             key={cardIndex}
             details={indexToProp(cardIndex)}
             pos={pos}
+            lastChange={this.props.lastCardChange[cardIndex]}
+            numColumns={table.length/3}
             selected={this.props.selected.includes(pos)}
             onClick={() => this.props.selectCard(pos)}
-          />)}
-          <div className="gameOverScreen">
-            <p>Your game is over. Well done!</p>
-            <p>Score: {Math.round(this.props.score / (27 - table.length / 3) * 27) }</p>
-            <span className="btn" onClick={this.props.resetGame}>Play again</span>
-          </div>
-        </div>
+          />
+        })}
+        <Card key="deck" details="deck" />
+        <Card key="pile" details="pile">
+          {this.props.finalScore > 0 ? (
+            <div className="gameControl">
+              <p>You finished the game.</p>
+              <p>Score: {Math.round(this.props.finalScore)}</p>
+              <span className="btn" onClick={this.props.resetGame}>Play again</span>
+            </div>
+          ) : (
+            <div className="gameControl">
+              <p>Are you ready?</p>
+              <span className="btn" onClick={this.props.resetGame}>Start the game</span>
+            </div>
+          )}
+        </Card>
+        <ShapeDefinitions />
       </div>
     )
   }

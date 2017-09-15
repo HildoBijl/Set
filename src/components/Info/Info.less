@@ -1,0 +1,17 @@
+@import '../../params.less';
+
+.info {
+	font-size: 2.5vh;
+	left: 0vh;
+	opacity: 1;
+	padding: @pagePadding;
+	position: absolute;
+	transition: opacity @movingTime;
+	top: 0vh;
+}
+
+.set.gameOver, .set.starting {
+	.info {
+		opacity: 0;
+	}
+}

@@ -5,82 +5,95 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  font-size: 30px;
   height: 28vh;
   justify-content: center;
+  opacity: 1;
   position: absolute;
-  transition: 0.5s;
+  touch-action: none;
+  transition: left 500ms, top 500ms;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   width: 18vh;
+  z-index: 10;
 }
-
 .card.selected {
-  background: #9944ff;
-}
-
-.card.y0 {
-  top: 2vh;
-}
-.card.y1 {
-  top: 33vh;
+  background: #aaa;
 }
 .card.y2 {
-  top: 64vh;
+  top: 67vh;
 }
-.card.x0 {
-  left: 2vh;
+.card.y1 {
+  top: 36vh;
 }
-.card.x1 {
-  left: 23vh;
-}
-.card.x2 {
-  left: 44vh;
-}
-.card.x3 {
-  left: 65vh;
-}
-.card.x4 {
-  left: 86vh;
-}
-.card.x5 {
-  left: 97vh;
+.card.y0 {
+  top: 5vh;
 }
 .card.x6 {
-  left: 118vh;
+  left: calc(50% +  54vh );
 }
-
+.card.x5 {
+  left: calc(50% +  43.5vh );
+}
+.card.x4 {
+  left: calc(50% +  33vh );
+}
+.card.x3 {
+  left: calc(50% +  22.5vh );
+}
+.card.x2 {
+  left: calc(50% +  12vh );
+}
+.card.x1 {
+  left: calc(50% +  1.5vh );
+}
+.card.x0 {
+  left: calc(50% +  -9vh );
+}
+.card.x-1 {
+  left: calc(50% +  -19.5vh );
+}
+.card.x-2 {
+  left: calc(50% +  -30vh );
+}
+.card.x-3 {
+  left: calc(50% +  -40.5vh );
+}
+.card.x-4 {
+  left: calc(50% +  -51vh );
+}
+.card.x-5 {
+  left: calc(50% +  -61.5vh );
+}
+.card.x-6 {
+  left: calc(50% +  -72vh );
+}
 .card .shape {
   box-sizing: border-box;
   height: 6.75vh;
-  width: 100%;
+  width: 18vh;
 }
-
-.card.prop00 .shape use {
-  stroke: #c60000;
-  fill: #c60000;
-  color: #c60000;
-}
-
-.card.prop01 .shape use {
-  stroke: #005400;
-  fill: #005400;
-  color: #005400;
-}
-
 .card.prop02 .shape use {
-  stroke: #4812a2;
-  fill: #4812a2;
   color: #4812a2;
+  fill: #4812a2;
+  stroke: #4812a2;
 }
-
+.card.prop01 .shape use {
+  color: #007735;
+  fill: #007735;
+  stroke: #007735;
+}
+.card.prop00 .shape use {
+  color: #c60000;
+  fill: #c60000;
+  stroke: #c60000;
+}
 .card.prop30 .shape use {
   color: transparent;
 }
-
 .card.prop31 .shape use {
   fill: none;
   stroke-width: 8px;
 }
-
 .card.prop32 .shape use {
   color: transparent;
   fill: none;

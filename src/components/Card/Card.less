@@ -1,0 +1,73 @@
+@import '../../params.less';
+
+.card {
+  background: white;
+  border-radius: 2vh;
+  box-shadow: 1.5vh 1.5vh 1.2vh #222;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: @cardHeight;
+  justify-content: center;
+  opacity: 1;
+  position: absolute;
+  touch-action: none;
+  transition: left @movingTime, top @movingTime;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  width: @cardWidth;
+  z-index: 10;
+
+  &.selected {
+    background: #aaa;
+  }
+
+  // Set positions for cards on the table.
+  .yLoop (@i) when (@i >= 0) {
+    &.y@{i} {
+      top: @pagePadding + @i*(@cardHeight + @cardSpacing);
+    }
+    .yLoop(@i - 1);
+  }
+  .yLoop(2);
+
+  .xLoop (@i) when (@i >= -6) {
+    &.x@{i} {
+      left: ~"calc(50% + " (@i*(@cardWidth + @cardSpacing) - @cardWidth)/2 ~")";
+    }
+    .xLoop(@i - 1);
+  }
+  .xLoop(6);
+
+  // Size up the SVG shape elements.
+  .shape {
+    box-sizing: border-box;
+    height: 3/8*@cardWidth;
+    width: @cardWidth;
+  }
+
+  // Set the color of the shape elements.
+  .colorLoop (@i) when (@i >= 0) {
+    &.prop0@{i} .shape use {
+      color: extract(@colors, @i + 1);
+      fill: extract(@colors, @i + 1);
+      stroke: extract(@colors, @i + 1);
+    }
+    .colorLoop(@i - 1);
+  }
+  .colorLoop(2);
+
+  // Set the filling of the shape elements.
+  &.prop30 .shape use {
+    color: transparent;
+  }
+  &.prop31 .shape use {
+    fill: none;
+    stroke-width: 8px;
+  }
+  &.prop32 .shape use {
+    color: transparent;
+    fill: none;
+    stroke-width: 8px;
+  }
+}

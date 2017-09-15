@@ -1,0 +1,151 @@
+@import '../../params.less';
+
+// We define some mixins.
+.leftBottom {
+  left: @pagePadding;
+  top: @pagePadding + 2*(@cardHeight + @cardSpacing);
+}
+.rightBottom {
+  left: ~"calc(100% - " (@cardWidth + @pagePadding) ~")";
+  top: @pagePadding + 2*(@cardHeight + @cardSpacing);
+}
+.center {
+  left: ~"calc(50% - " @cardWidth/2 ~")";
+  top: 50vh - @cardHeight/2;
+}
+.centerAndBig {
+  border-radius: 4vh;
+  border-width: 2vh;
+  box-shadow: 3vh 3vh 2.4vh #222;
+  height: 2*@cardHeight;
+  left: ~"calc(50% - " @cardWidth ~")";
+  top: 50vh - @cardHeight;
+  width: 2*@cardWidth;
+}
+
+// And now the fun starts. This is some complicated stuff, with lots of settings going through each other.
+.set {
+  .card {
+    // Style the deck and pile.
+    &.stack {
+      background: rgba(142.5, 191, 243, 1);
+      border: 1vh solid white;
+      text-align: center;
+      z-index: 90;
+    }
+
+    // Position the deck and pile.
+    &.pile, &.inPile {
+      .rightBottom;
+      cursor: auto;
+    }
+    &.deck, &.inDeck {
+      .leftBottom;
+      cursor: auto;
+    }
+    
+    // Make sure that symbols are only shown when necessary. Hide them otherwise, to reduce CPU usage. (Rendering the dotted pattern can be tough when done 81 times.)
+    &.inDeck svg, &.inPile svg {
+      display: none;
+    }
+    &.onTable {
+      // transition: background-color @transitionTime;
+      svg {
+        display: block;
+      }
+    }
+    &.moving {
+      transition: left @movingTime, top @movingTime;
+      z-index: 20;
+      svg {
+        display: block;
+      }
+    }
+  }
+
+  // Ensure cards can move when needed. So move along with the deck at the start, and to the center at the end.
+  &.starting {
+    .card {
+      .leftBottom;
+      opacity: 0;
+    }
+  }
+  &.gameOver {
+    .card {
+      .center;
+      transition: left @movingTime, top @movingTime;
+    }
+  }
+
+  // Hide the deck when there are no cards in it, or when we're still starting up. Note that the deck never moves.
+  &.noCardsInDeck, &.gameOver, &.starting {
+    .card.deck {
+      opacity: 0;
+    }
+  }
+
+  // Hide the pile by default, but show it when it needs to be visible. Also put it in the right place. The pile can move to multiple places on the screen.
+  .card.pile {
+    opacity: 0;
+  }
+  &.cardsOnPile, &.gameOver, &.starting {
+    .card.pile {
+      opacity: 1;
+    }
+  }
+  &.cardsOnPile {
+    .card.pile {
+      display: flex;
+      transition: opacity @movingTime*2/5 @movingTime*3/5;
+    }
+  }
+  &.gameOver {
+    .card.pile {
+      .centerAndBig;
+      transition: left @movingTime, top @movingTime, width @movingTime, height @movingTime;
+    }
+  }
+  &.starting {
+    .card.pile {
+      .leftBottom;
+      transition: left @movingTime, top @movingTime, width @movingTime, height @movingTime;
+    }
+  }
+
+  // Style the game control screen. Make sure it's only shown when needed.
+  .gameControl {
+    opacity: 0;
+    font-size: 1.25vh;
+    transition: @movingTime;
+    p {
+      margin: 0 0 0.5vh 0;
+      transition: margin @movingTime;
+    }
+    .btn {
+      background-image: linear-gradient(160deg, rgba(136,136,221,1), rgba(102,102,221,1));
+      border-radius: 0.5vh;
+      cursor: pointer;
+      display: block;
+      margin: 0.75vh auto 0;
+      padding: 0.25vh;
+      transition: border-radius @movingTime, margin @movingTime, padding @movingTime, width @movingTime;
+      width: 11vh;
+    }
+  }
+  &.gameOver {
+    .gameControl {
+      opacity: 1;
+      font-size: 2.5vh;
+      p {
+        margin: 0 0 1vh 0;
+      }
+      .btn {
+        background-image: linear-gradient(160deg, rgba(136,136,221,1), rgba(102,102,221,1));
+        border-radius: 1vh;
+        margin: 1.5vh auto 0;
+        padding: 0.5vh;
+        width: 22vh;
+      }
+    }
+  }
+}

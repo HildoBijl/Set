@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Set",
+  "name": "Set - The Game",
+  "description": "An online implementation of the famous Set game.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -9,7 +10,9 @@
     }
   ],
   "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "display": "fullscreen",
+  "theme_color": "#ffffff",
+  "background_color": "#6d371b",
+  "lang": "en-US",
+  "orientation": "landscape"
 }

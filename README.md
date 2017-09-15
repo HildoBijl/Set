@@ -4,7 +4,8 @@ An online implementation of the Set game. It is still under construction.
 
 Here are some ideas we are considering to implement.
 
-- A single-player mode, where you can try to get a high score.
+- A single-player mode, where you can just play as much as you want.
+- A single-player high-score mode. Try to get a high score, and if you get too far behind in your game, you'll get a game over.
 - A multi-player mode across devices, where it's about who finds a set first. Getting the most sets wins you the game.
 - A multi-player cooperative mode, where it's about getting the highest score together.
 - A team mode, where teams can play against each other.

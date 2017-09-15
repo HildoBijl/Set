@@ -1,95 +1,128 @@
-.set {
-  border: 3px solid red;
-  border-radius: 20px;
-  box-sizing: border-box;
-  height: 96vh;
-  margin: 2vh auto;
-  min-width: 14vw;
-  transition: 0.5s;
+.leftBottom {
+  left: 5vh;
+  top: 67vh;
 }
-
-.set .info {
-  display: flex;
-  flex-flow: row nowrap;
-  font-size: 16px;
-  height: 7vh;
-  justify-content: space-between;
-  padding: 13px 25px;
-  width: 100%;
+.rightBottom {
+  left: calc(100% -  23vh );
+  top: 67vh;
 }
-
-.set .score {
-  text-align: left;
+.center {
+  left: calc(50% -  9vh );
+  top: 36vh;
 }
-
-.set .setsLeft {
-  text-align: right;
+.centerAndBig {
+  border-radius: 4vh;
+  border-width: 2vh;
+  box-shadow: 3vh 3vh 2.4vh #222;
+  height: 56vh;
+  left: calc(50% -  18vh );
+  top: 22vh;
+  width: 36vh;
 }
-
-.set .cards {
-  height: 680px;
-  position: relative;
-  width: 100%;
+.set .card.stack {
+  background: #8fbff3;
+  border: 1vh solid white;
+  text-align: center;
+  z-index: 90;
 }
-
-.gameOverScreen {
-  background-image: linear-gradient(135deg, rgba(102,51,238,0.9), rgba(170,170,170,0.9));
-  border-radius: 20px;
-  box-sizing: border-box;
-  color: #fff;
+.set .card.pile,
+.set .card.inPile {
+  left: calc(100% -  23vh );
+  top: 67vh;
+  cursor: auto;
+}
+.set .card.deck,
+.set .card.inDeck {
+  left: 5vh;
+  top: 67vh;
+  cursor: auto;
+}
+.set .card.inDeck svg,
+.set .card.inPile svg {
   display: none;
-  font-size: 20px;
-  height: 160px;
-  left: 50%;
-  padding: 30px;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  width: 340px;
-  z-index: 10;
 }
-
-.gameOverScreen p {
-  margin: 0px 0px 10px 0px;
-}
-
-.set.gameOver .gameOverScreen {
+.set .card.onTable svg {
   display: block;
 }
-
-.gameOverScreen .btn {
-  background-image: linear-gradient(160deg, rgba(136,136,221,1), rgba(102,102,221,1));
-  border-radius: 5px;
+.set .card.moving {
+  transition: left 500ms, top 500ms;
+  z-index: 20;
+}
+.set .card.moving svg {
+  display: block;
+}
+.set.starting .card {
+  left: 5vh;
+  top: 67vh;
+  opacity: 0;
+}
+.set.gameOver .card {
+  left: calc(50% -  9vh );
+  top: 36vh;
+  transition: left 500ms, top 500ms;
+}
+.set.noCardsInDeck .card.deck,
+.set.gameOver .card.deck,
+.set.starting .card.deck {
+  opacity: 0;
+}
+.set .card.pile {
+  opacity: 0;
+}
+.set.cardsOnPile .card.pile,
+.set.gameOver .card.pile,
+.set.starting .card.pile {
+  opacity: 1;
+}
+.set.cardsOnPile .card.pile {
+  display: flex;
+  transition: opacity 200ms 300ms;
+}
+.set.gameOver .card.pile {
+  border-radius: 4vh;
+  border-width: 2vh;
+  box-shadow: 3vh 3vh 2.4vh #222;
+  height: 56vh;
+  left: calc(50% -  18vh );
+  top: 22vh;
+  width: 36vh;
+  transition: left 500ms, top 500ms, width 500ms, height 500ms;
+}
+.set.starting .card.pile {
+  left: 5vh;
+  top: 67vh;
+  transition: left 500ms, top 500ms, width 500ms, height 500ms;
+}
+.set .gameControl {
+  opacity: 0;
+  font-size: 1.25vh;
+  transition: 500ms;
+}
+.set .gameControl p {
+  margin: 0 0 0.5vh 0;
+  transition: margin 500ms;
+}
+.set .gameControl .btn {
+  background-image: linear-gradient(160deg, #8888dd, #6666dd);
+  border-radius: 0.5vh;
   cursor: pointer;
   display: block;
-  font-size: 18px;
-  height: 30px;
-  margin: 15px auto 0px;
-  padding: 5px;
-  width: 120px;
+  margin: 0.75vh auto 0;
+  padding: 0.25vh;
+  transition: border-radius 500ms, margin 500ms, padding 500ms, width 500ms;
+  width: 11vh;
 }
-
-.set.w0 {
-  width: 3vh;
+.set.gameOver .gameControl {
+  opacity: 1;
+  font-size: 2.5vh;
 }
-.set.w1 {
-  width: 24vh;
+.set.gameOver .gameControl p {
+  margin: 0 0 1vh 0;
 }
-.set.w2 {
-  width: 45vh;
-}
-.set.w3 {
-  width: 66vh;
-}
-.set.w4 {
-  width: 87vh;
-}
-.set.w5 {
-  width: 108vh;
-}
-.set.w6 {
-  width: 129vh;
-}
-.set.w7 {
-  width: 150vh;
+.set.gameOver .gameControl .btn {
+  background-image: linear-gradient(160deg, #8888dd, #6666dd);
+  border-radius: 1vh;
+  margin: 1.5vh auto 0;
+  padding: 0.5vh;
+  width: 22vh;
 }
