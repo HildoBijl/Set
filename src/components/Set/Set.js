@@ -8,6 +8,7 @@ import { indexToProp, keyToPos } from '../../logic/setGame.js'
 import setActions from '../../actions/setGame.js'
 
 import ShapeDefinitions from '../../assets/ShapeDefinitions.js'
+import logo from '../../assets/logo.svg'
 import Card from '../Card/Card.js'
 import Info from '../Info/Info.js'
 
@@ -67,17 +68,20 @@ class Set extends Component {
             onClick={() => this.props.selectCard(pos)}
           />
         })}
-        <Card key="deck" details="deck" />
+        <Card key="deck" details="deck"><img src={logo} className="cardLogo" alt="Set logo" /></Card>
         <Card key="pile" details="pile">
           {this.props.finalScore > 0 ? (
             <div className="gameControl">
-              <p>You finished the game.</p>
-              <p>Score: {Math.round(this.props.finalScore)}</p>
+              <div className="scores">
+                <p>You finished the game.</p>
+                <p>Score: {Math.round(this.props.finalScore)}</p>
+              </div>
+              <img src={logo} className="cardLogo" alt="Set logo" />
               <span className="btn" onClick={this.props.resetGame}>Play again</span>
             </div>
           ) : (
             <div className="gameControl">
-              <p>Are you ready?</p>
+              <img src={logo} className="cardLogo" alt="Set logo" />
               <span className="btn" onClick={this.props.resetGame}>Start the game</span>
             </div>
           )}
