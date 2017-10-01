@@ -24,12 +24,12 @@ export default function setGameReducer(oldState = getInitialState(), action) {
       // Check if it is a set.
       if (isSet(selected.map((v) => state.table[v]).map(indexToProp))) {
         selected.forEach((pos) => {
-          state.lastCardChange[state.table[pos]] = new Date()
+          state.lastCardChange[state.table[pos]] = Date.now()
           state.table[pos] = undefined
         })
         state.selected = []
         state.score+= calculatePoints(state.lastSetAt)
-        state.lastSetAt = new Date()
+        state.lastSetAt = Date.now()
         return addCardsToTable(state)
       } else {
         state.selected = []
@@ -41,7 +41,7 @@ export default function setGameReducer(oldState = getInitialState(), action) {
       state.finalScore = oldState.finalScore
       return state
     case 'StartGame':
-      state.lastSetAt = new Date()
+      state.lastSetAt = Date.now()
       return addCardsToTable(state)
     default:
       return state
@@ -59,7 +59,7 @@ function getInitialState() {
     gameOver: true, // Is the game finished?
     score: 0, // The total accumulated score.
     finalScore: 0, // The final score at the end of the game.
-    lastSetAt: new Date(), // The time at which the last set was obtained. Used for scoring purposes.
+    lastSetAt: Date.now(), // The time at which the last set was obtained. Used for scoring purposes.
   }
 }
 
@@ -79,11 +79,11 @@ function addCardsToTable(state) {
     if (emptyPlace === -1) {
       state.table.push(cardFromDeck)
       tableAsProp.push(indexToProp(cardFromDeck))
-      state.lastCardChange[cardFromDeck] = new Date()
+      state.lastCardChange[cardFromDeck] = Date.now()
     } else {
       state.table[emptyPlace] = cardFromDeck
       tableAsProp[emptyPlace] = indexToProp(cardFromDeck)
-      state.lastCardChange[cardFromDeck] = new Date()
+      state.lastCardChange[cardFromDeck] = Date.now()
     }
     numCardsOnTable++
   }
@@ -108,7 +108,7 @@ function addCardsToTable(state) {
     cardsToMove.forEach((v,i) => {
       const cardIndex = state.table[cardsToMove[i]]
       state.table[emptyPlaces[shifts[i]]] = cardIndex
-      state.lastCardChange[cardIndex] = new Date()
+      state.lastCardChange[cardIndex] = Date.now()
     })
     state.table.length = numCardsOnTable // Remove the cards that we just moved.
   }

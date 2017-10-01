@@ -4,7 +4,7 @@
   opacity: 1;
   padding: 5vh;
   position: absolute;
-  transition: opacity 500ms;
+  transition: opacity 400ms;
   top: 0vh;
 }
 .set.gameOver .info,

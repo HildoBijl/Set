@@ -11,17 +11,17 @@ export default class Card extends Component {
   constructor() {
     super()
     this.state = {
-      lastClicked: new Date()
+      lastClicked: Date.now()
     }
   }
 
   handleClick(event) {
     // When there was a touch very recently, ignore the mousepress.
-    if (new Date() - this.state.lastClicked < msBetweenTouches)
+    if (Date.now() - this.state.lastClicked < msBetweenTouches)
       return
     // Note the time at which a touch was made.
     if (event.type === "touchstart")
-      this.setState({ lastClicked: new Date() })
+      this.setState({ lastClicked: Date.now() })
     // Deal with the click.
     this.props.onClick()
   }
@@ -49,7 +49,7 @@ export default class Card extends Component {
       classes["x" + columnIndex] = true
       classes.onTable = true
     }
-    classes.moving = (new Date() - this.props.lastChange <= movingTime)
+    classes.moving = (Date.now() - this.props.lastChange <= movingTime)
     
     // Fill the card with shapes and display it.
     const numberOfShapes = card[1] + 1

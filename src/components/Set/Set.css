@@ -45,7 +45,7 @@
   display: block;
 }
 .set .card.moving {
-  transition: left 500ms, top 500ms;
+  transition: left 400ms, top 400ms;
   z-index: 20;
 }
 .set .card.moving svg {
@@ -56,7 +56,7 @@
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 75%;
+  width: 80%;
 }
 .set.starting .card {
   left: 5vh;
@@ -66,7 +66,7 @@
 .set.gameOver .card {
   left: calc(50% -  9vh );
   top: 36vh;
-  transition: left 500ms, top 500ms;
+  transition: left 400ms, top 400ms;
 }
 .set.noCardsInDeck .card.deck,
 .set.gameOver .card.deck,
@@ -83,7 +83,7 @@
 }
 .set.cardsOnPile .card.pile {
   display: flex;
-  transition: opacity 200ms 300ms;
+  transition: opacity 160ms 240ms;
 }
 .set.gameOver .card.pile {
   border-radius: 4vh;
@@ -93,24 +93,25 @@
   left: calc(50% -  18vh );
   top: 22vh;
   width: 36vh;
-  transition: left 500ms, top 500ms, width 500ms, height 500ms;
+  transition: left 400ms, top 400ms, width 400ms, height 400ms, border-width 400ms, border-radius 400ms;
 }
 .set.starting .card.pile {
   left: 5vh;
   top: 67vh;
-  transition: left 500ms, top 500ms, width 500ms, height 500ms;
+  transition: left 400ms, top 400ms, width 400ms, height 400ms, border-width 400ms, border-radius 400ms;
 }
 .set .gameControl {
   font-size: 1.25vh;
-  transition: 500ms;
+  transition: 400ms;
 }
 .set .gameControl .scores {
+  cursor: default;
   left: 50%;
   opacity: 0;
   position: absolute;
   top: 13%;
   transform: translate(-50%, -50%);
-  transition: opacity 500ms;
+  transition: opacity 400ms;
   width: 100%;
 }
 .set .gameControl .scores p {
@@ -119,7 +120,7 @@
 .set .gameControl .btn {
   background-image: linear-gradient(160deg, #8888dd, #6666dd);
   border-radius: 0.5vh;
-  cursor: pointer;
+  cursor: default;
   display: block;
   left: 50%;
   margin: 0.75vh auto 0;
@@ -128,18 +129,20 @@
   position: absolute;
   top: 84.5%;
   transform: translate(-50%, -50%);
-  transition: border-radius 500ms, margin 500ms, padding 500ms, width 500ms, opacity 500ms;
+  transition: border-radius 400ms, margin 400ms, padding 400ms, width 400ms, opacity 400ms;
   width: 11vh;
 }
 .set.gameOver .gameControl {
   font-size: 2.5vh;
 }
 .set.gameOver .gameControl .scores {
+  cursor: auto;
   opacity: 1;
 }
 .set.gameOver .gameControl .btn {
   background-image: linear-gradient(160deg, #8888dd, #6666dd);
   border-radius: 1vh;
+  cursor: pointer;
   margin: 1.5vh auto 0;
   opacity: 1;
   padding: 0.5vh;

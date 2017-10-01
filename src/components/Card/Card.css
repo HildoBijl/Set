@@ -10,7 +10,7 @@
   opacity: 1;
   position: absolute;
   touch-action: none;
-  transition: left 500ms, top 500ms;
+  transition: left 400ms, top 400ms;
   user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   width: 18vh;

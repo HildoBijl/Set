@@ -6,7 +6,10 @@ const actions = {
     pos,
   }),
   resetGame: () => (
-    (dispatch) => {
+    (dispatch, getState) => {
+      console.log(getState())
+      if (!getState().setGame.gameOver)
+        return
       dispatch({ type: 'PrepareStartGame' })
       setTimeout(() => dispatch({ type: 'StartGame' }), movingTime)
     }

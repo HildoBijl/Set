@@ -1,4 +1,4 @@
-An online implementation of the Set game. It is still under construction.
+An online implementation of the Set game. The latest version can be found at [set.hildobijl.com](http://set.hildobijl.com/). It's still under construction, so feedback is welcome.
 
 ## Feature list
 

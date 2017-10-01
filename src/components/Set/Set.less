@@ -1,6 +1,6 @@
 @import '../../params.less';
 
-// We define some mixins.
+// We define some mixins for the card positions.
 .leftBottom {
   left: @pagePadding;
   top: @pagePadding + 2*(@cardHeight + @cardSpacing);
@@ -68,7 +68,7 @@
       position: absolute;
       top: 50%;
       transform: translate(-50%, -50%);
-      width: 75%;
+      width: 80%;
     }
   }
 
@@ -111,13 +111,13 @@
   &.gameOver {
     .card.pile {
       .centerAndBig;
-      transition: left @movingTime, top @movingTime, width @movingTime, height @movingTime;
+      transition: left @movingTime, top @movingTime, width @movingTime, height @movingTime, border-width @movingTime, border-radius @movingTime;
     }
   }
   &.starting {
     .card.pile {
       .leftBottom;
-      transition: left @movingTime, top @movingTime, width @movingTime, height @movingTime;
+      transition: left @movingTime, top @movingTime, width @movingTime, height @movingTime, border-width @movingTime, border-radius @movingTime;
     }
   }
 
@@ -126,6 +126,7 @@
     font-size: 1.25vh;
     transition: @movingTime;
     .scores {
+      cursor: default;
       left: 50%;
       opacity: 0;
       position: absolute;
@@ -141,7 +142,7 @@
     .btn {
       background-image: linear-gradient(160deg, rgba(136,136,221,1), rgba(102,102,221,1));
       border-radius: 0.5vh;
-      cursor: pointer;
+      cursor: default;
       display: block;
       left: 50%;
       margin: 0.75vh auto 0;
@@ -158,11 +159,13 @@
     .gameControl {
       font-size: 2.5vh;
       .scores {
+        cursor: auto;
         opacity: 1;
       }
       .btn {
         background-image: linear-gradient(160deg, rgba(136,136,221,1), rgba(102,102,221,1));
         border-radius: 1vh;
+        cursor: pointer;
         margin: 1.5vh auto 0;
         opacity: 1;
         padding: 0.5vh;

@@ -46,7 +46,7 @@ export function findSets(cards) {
 
 // Calculate the points which we get for a set, given that the previous set was found at the given lastSetAt date parameter.
 export function calculatePoints(lastSetAt) {
-  let timePassed = new Date() - lastSetAt
+  let timePassed = Date.now() - lastSetAt
   return 100*Math.pow(0.5, timePassed/15000)
 }
 
