@@ -17,10 +17,16 @@ class Set extends Component {
     document.onkeydown = this.handleKeyPress.bind(this)
   }
   handleKeyPress(event) {
+    console.log(event)
+    // If any special key (like control or mac-command) is pressed, then the user probably didn't want anything special. Do nothing.
+    if (event.ctrlKey || event.shiftKey || event.metaKey || event.altKey)
+      return
+
     // Check the spacebar/enter for starting/resetting the game.
     if (this.props.gameOver && (event.key === " " || event.key === "Enter")) {
       event.preventDefault()
       this.props.resetGame()
+      return
     }
 
     // Check the letter keys for selecting a card.
