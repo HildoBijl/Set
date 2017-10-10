@@ -149,25 +149,25 @@ export default class ShapeDefinitions extends Component {
             <path className="wave" d="M84,102.75c0,-40 25,-80 75,-80c60,0 80,23 130,23c40,0 50,-23 70,-23c15,0 25,20 25,50c0,40 -25,80 -75,80c-60,0 -80,-23 -130,-23c-40,0 -50,23 -70,23c-15,0 -25,-20 -25,-50z" />
           </symbol>
           <symbol id="wave" viewBox="0 0 468 175.5">
-            <use href="#wavePath" />
-            <use href="#wavePath" fill="currentColor" mask="url(#dotMask)" />
-            <use href="#wavePath" fill="none" />
+            <use xlinkHref="#wavePath" />
+            <use xlinkHref="#wavePath" fill="currentColor" mask="url(#dotMask)" />
+            <use xlinkHref="#wavePath" fill="none" />
           </symbol>
           <symbol id="ellipsePath" viewBox="0 0 468 175.5">
             <ellipse cx="234" cy="87.75" rx="154.5" ry="67.5" />
           </symbol>
           <symbol id="ellipse" viewBox="0 0 468 175.5">
-            <use href="#ellipsePath" />
-            <use href="#ellipsePath" fill="currentColor" mask="url(#dotMask)" />
-            <use href="#ellipsePath" fill="none" />
+            <use xlinkHref="#ellipsePath" />
+            <use xlinkHref="#ellipsePath" fill="currentColor" mask="url(#dotMask)" />
+            <use xlinkHref="#ellipsePath" fill="none" />
           </symbol>
           <symbol id="rectPath" viewBox="0 0 468 175.5">
             <rect x="87.5" y="29" width="293" height="117.5" />
           </symbol>
           <symbol id="rect" viewBox="0 0 468 175.5">
-            <use href="#rectPath" />
-            <use href="#rectPath" fill="currentColor" mask="url(#dotMask)" />
-            <use href="#rectPath" fill="none" />
+            <use xlinkHref="#rectPath" />
+            <use xlinkHref="#rectPath" fill="currentColor" mask="url(#dotMask)" />
+            <use xlinkHref="#rectPath" fill="none" />
           </symbol>
         </defs>
       </svg>
